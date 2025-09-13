@@ -1,15 +1,15 @@
 import { Fragment, useState } from 'react'
 import { Outlet, NavLink } from 'react-router-dom'
 import { Dialog, Transition } from '@headlessui/react'
-import { 
-  Bars3Icon, 
+import {
+  Bars3Icon,
   XMarkIcon,
   HomeIcon,
   CubeIcon,
-  MapPinIcon,
   TruckIcon,
   ChartBarIcon,
-  UserIcon
+  UserIcon,
+  UserGroupIcon
 } from '@heroicons/react/24/outline'
 import { useAuthStore } from '../../store/auth'
 
@@ -22,14 +22,14 @@ export default function MainLayout() {
   const navigation = [
     { name: 'Dashboard', href: '/', icon: HomeIcon },
     { name: 'Products', href: '/products', icon: CubeIcon },
-    { name: 'Locations', href: '/locations', icon: MapPinIcon },
+    { name: 'Staff', href: '/staff', icon: UserGroupIcon },
     { name: 'Suppliers & PO', href: '/suppliers-po', icon: TruckIcon },
     { name: 'Sales & Expenses', href: '/sales-expenses', icon: ChartBarIcon },
     { name: 'Profile', href: '/profile', icon: UserIcon },
   ]
 
   return (
-    <div className={`min-h-screen ${isDarkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
+    <div className={`min-h-screen ${isDarkMode ? 'bg-custom-dark' : 'bg-gray-50'}`}>
       {/* Mobile sidebar */}
       <Transition.Root show={sidebarOpen} as={Fragment}>
         <Dialog as="div" className="relative z-50 lg:hidden" onClose={setSidebarOpen}>
@@ -71,9 +71,17 @@ export default function MainLayout() {
                     </button>
                   </div>
                 </Transition.Child>
-                <div className={`flex grow flex-col gap-y-5 overflow-y-auto px-6 pb-4 ${isDarkMode ? 'bg-gray-800' : 'bg-white'}`}>
+                <div className={`flex grow flex-col gap-y-5 overflow-y-auto px-6 pb-4 ${isDarkMode ? 'bg-custom-dark' : 'bg-white'}`}>
                   <div className="flex h-16 shrink-0 items-center">
-                    <span className={`text-xl font-bold ${isDarkMode ? 'text-primary-400' : 'text-primary-600'}`}>TrackIt</span>
+                    <div className="flex items-center space-x-3">
+                      <div className="w-8 h-8 bg-custom-mustard rounded-lg flex items-center justify-center">
+                        <span className="text-custom-dark font-bold text-lg">T</span>
+                      </div>
+                      <div>
+                        <h1 className={`text-xl font-bold ${isDarkMode ? 'text-custom-cream' : 'text-gray-900'}`}>TrackIt</h1>
+                        <p className={`text-xs ${isDarkMode ? 'text-custom-cream' : 'text-gray-500'}`}>Inventory Management</p>
+                      </div>
+                    </div>
                   </div>
                   <nav className="flex flex-1 flex-col">
                     <ul role="list" className="flex flex-1 flex-col gap-y-7">
@@ -88,10 +96,10 @@ export default function MainLayout() {
                                   `group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold ${
                                     isActive
                                       ? isDarkMode 
-                                        ? 'bg-primary-900 text-primary-400' 
+                                        ? 'bg-custom-orange text-custom-dark' 
                                         : 'bg-primary-50 text-primary-600'
                                       : isDarkMode
-                                        ? 'text-gray-300 hover:text-primary-400 hover:bg-gray-700'
+                                        ? 'text-custom-cream hover:text-custom-mustard hover:bg-custom-orange'
                                         : 'text-gray-700 hover:text-primary-600 hover:bg-gray-50'
                                   }`
                                 }
@@ -107,9 +115,9 @@ export default function MainLayout() {
                       <li className="mt-auto">
                         <button
                           onClick={logout}
-                          className={`group flex w-full gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 hover:text-primary-600 ${
+                          className={`group flex w-full gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 hover:text-custom-mustard ${
                             isDarkMode 
-                              ? 'text-gray-300 hover:bg-gray-700' 
+                              ? 'text-custom-cream hover:bg-custom-orange' 
                               : 'text-gray-700 hover:bg-gray-50'
                           }`}
                         >
@@ -129,11 +137,19 @@ export default function MainLayout() {
       <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
         <div className={`flex grow flex-col gap-y-5 overflow-y-auto border-r px-6 pb-4 ${
           isDarkMode 
-            ? 'bg-gray-800 border-gray-700' 
+            ? 'bg-custom-dark border-custom-orange' 
             : 'bg-white border-gray-200'
         }`}>
           <div className="flex h-16 shrink-0 items-center">
-            <span className={`text-xl font-bold ${isDarkMode ? 'text-primary-400' : 'text-primary-600'}`}>TrackIt</span>
+            <div className="flex items-center space-x-3">
+              <div className="w-8 h-8 bg-custom-mustard rounded-lg flex items-center justify-center">
+                <span className="text-custom-dark font-bold text-lg">T</span>
+              </div>
+              <div>
+                <h1 className={`text-xl font-bold ${isDarkMode ? 'text-custom-cream' : 'text-gray-900'}`}>TrackIt</h1>
+                <p className={`text-xs ${isDarkMode ? 'text-custom-cream' : 'text-gray-500'}`}>Inventory Management</p>
+              </div>
+            </div>
           </div>
           <nav className="flex flex-1 flex-col">
             <ul role="list" className="flex flex-1 flex-col gap-y-7">
@@ -148,10 +164,10 @@ export default function MainLayout() {
                           `group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold ${
                             isActive
                               ? isDarkMode 
-                                ? 'bg-primary-900 text-primary-400' 
+                                ? 'bg-custom-orange text-custom-dark' 
                                 : 'bg-primary-50 text-primary-600'
                               : isDarkMode
-                                ? 'text-gray-300 hover:text-primary-400 hover:bg-gray-700'
+                                ? 'text-custom-cream hover:text-custom-mustard hover:bg-custom-orange'
                                 : 'text-gray-700 hover:text-primary-600 hover:bg-gray-50'
                           }`
                         }
@@ -166,9 +182,9 @@ export default function MainLayout() {
               <li className="mt-auto">
                 <button
                   onClick={logout}
-                  className={`group flex w-full gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 hover:text-primary-600 ${
+                  className={`group flex w-full gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 hover:text-custom-mustard ${
                     isDarkMode 
-                      ? 'text-gray-300 hover:bg-gray-700' 
+                      ? 'text-custom-cream hover:bg-custom-orange' 
                       : 'text-gray-700 hover:bg-gray-50'
                   }`}
                 >
@@ -184,12 +200,12 @@ export default function MainLayout() {
       <div className="lg:pl-72">
         <div className={`sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-4 border-b px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-8 ${
           isDarkMode 
-            ? 'border-gray-700 bg-gray-800' 
+            ? 'border-custom-orange bg-custom-dark' 
             : 'border-gray-200 bg-white'
         }`}>
             <button
               type="button"
-              className={`-m-2.5 p-2.5 lg:hidden ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}
+              className={`-m-2.5 p-2.5 lg:hidden ${isDarkMode ? 'text-custom-cream' : 'text-gray-700'}`}
               onClick={() => setSidebarOpen(true)}
             >
               <Bars3Icon className="h-6 w-6" />
@@ -198,19 +214,19 @@ export default function MainLayout() {
             <div className="flex flex-1"></div>
             <div className="flex items-center justify-center flex-1">
               <div className="text-center">
-                <h1 className={`text-2xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>STRIKERS</h1>
-                <p className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>Inventory Management System</p>
+                <h1 className={`text-2xl font-bold ${isDarkMode ? 'text-custom-cream' : 'text-gray-900'}`}>STRIKERS</h1>
+                <p className={`text-sm ${isDarkMode ? 'text-custom-cream' : 'text-gray-500'}`}>Inventory Management System</p>
               </div>
             </div>
             <div className="flex flex-1 justify-end items-center space-x-4">
-              <span className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>Welcome back!</span>
+              <span className={`text-sm ${isDarkMode ? 'text-custom-cream' : 'text-gray-500'}`}>Welcome back!</span>
               <div className={`h-8 w-8 rounded-full flex items-center justify-center overflow-hidden ${
-                isDarkMode ? 'bg-primary-900' : 'bg-primary-100'
+                isDarkMode ? 'bg-custom-mustard' : 'bg-primary-100'
               }`}>
                 {profileImage ? (
                   <img src={profileImage} alt="Profile" className="h-full w-full object-cover" />
                 ) : (
-                  <UserIcon className={`h-5 w-5 ${isDarkMode ? 'text-primary-400' : 'text-primary-600'}`} />
+                  <UserIcon className={`h-5 w-5 ${isDarkMode ? 'text-custom-dark' : 'text-primary-600'}`} />
                 )}
               </div>
             </div>
